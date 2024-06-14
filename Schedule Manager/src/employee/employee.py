@@ -2,6 +2,7 @@ class Employee:
     """
     Creates an object representing an employee. Each employee has a last name, first name, email address, wage, and
     availability.
+    :cvar MIN_WAGE: the minimum wage an employee can have
     :ivar _last: the last name of the employee
     :ivar _first: the first name of the employee
     :ivar _email: the email address of the employee
