@@ -1,22 +1,13 @@
 from PyQt6.QtWidgets import QApplication
+from PyQt6.QtGui import QIcon
+
+from .config import Config
 
 
 class Application(QApplication):
     """
     Creates an application for the GUI to run in.
-    :cvar _instance: the single instance of the `Application`
     """
-
-    _instance = None
-
-    def __new__(cls, argv: list[str]):
-        """
-        Creates the single instance of the `Application`
-        :param argv: command line arguments
-        """
-        if cls._instance is None:
-            cls._instance = super(Application, cls).__new__(cls)
-        return cls._instance
 
     def __init__(self, argv: list[str]):
         """
@@ -25,12 +16,16 @@ class Application(QApplication):
         """
         super().__init__(argv)
 
-    def instance(self):
+        self.setApplicationName("Schedule Manager")
+        self.setWindowIcon(QIcon(Config.App.icon))
+        with open(Config.App.style) as f:
+            style = f.read()
+        self.setStyleSheet(style)
+
+    @staticmethod
+    def instance() -> 'Application':
         """
         Returns the single instance of the `Application`.
-        :return: the single instance of the `Application`
-        :raises RuntimeError: if the `Application` instance has not been created
+        :return: the single instance of the `Application` or `None` if no instance has been created
         """
-        if self._instance is None:
-            raise RuntimeError('Application instance has not been created')
-        return self._instance
+        return Application.instance()
