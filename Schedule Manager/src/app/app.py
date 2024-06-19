@@ -1,5 +1,6 @@
-from PyQt6.QtWidgets import QApplication
+from PyQt6.QtCore import QCoreApplication
 from PyQt6.QtGui import QIcon
+from PyQt6.QtWidgets import QApplication
 
 from .config import Config
 
@@ -23,9 +24,9 @@ class Application(QApplication):
         self.setStyleSheet(style)
 
     @staticmethod
-    def instance() -> 'Application':
+    def instance() -> QCoreApplication | None:
         """
         Returns the single instance of the `Application`.
         :return: the single instance of the `Application` or `None` if no instance has been created
         """
-        return Application.instance()
+        return QApplication.instance()
