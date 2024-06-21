@@ -40,9 +40,9 @@ class Employee:
         """
         if not isinstance(other, Employee):
             return False
-        if self.last != other.last:
+        if self._last != other._last:
             return False
-        if self.first != other.first:
+        if self._first != other._first:
             return False
         return True
 
